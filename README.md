@@ -38,6 +38,8 @@ VIRTUAL SCROLLING & TESTING IMPLEMENTATION:
      Responsive design using media queries for screen widths below 992px and 576px.
      Smooth hover zoom effects and fixed position scroll button enhance UX.
 
+     ![image alt](https://github.com/Yamini0115/Cardlist/blob/34afc3cbd77ee52060ccfae514e61e5cff68a2f7/home%20products.png)
+
      
 
      
