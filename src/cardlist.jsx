@@ -15,13 +15,25 @@ const descriptions = [
   "Ideal for indoor or outdoor use.",
 ];
 
-const generateCards = (count) =>
-  Array.from({ length: count }, (_, index) => ({
-    id: index + 1,
-    image: `https://picsum.photos/seed/${index + 1}/200/150`,
-    title: `Product ${index + 1}`,
-    description: descriptions[index % descriptions.length],
-  }));
+const generateCards = (count) =>{
+  // Array.from({ length: count }, (_, index) => ({
+  //   id: index + 1,
+  //   image: `https://picsum.photos/seed/${index + 1}/200/150`,
+  //   title: `Product ${index + 1}`,
+  //   description: descriptions[index % descriptions.length],
+  // }));
+     const card1=[];
+     for(let i=0;i<count;i++){
+      card1.push({
+        id:i+1,
+        title:`product ${i+1}`,
+        image:`https://picsum.photos/seed/${i + 1}/200/150`,
+        description:descriptions[i%descriptions.length]
+          })
+     }
+     return card1;
+    }
+
 
 function Cardlist() {
   const cards = generateCards(1000);
@@ -93,7 +105,7 @@ function Cardlist() {
 
       {showScrollTop && (
         <button className="scroll-btn" onClick={scrollToTop}>
-          ↑
+          top
         </button>
       )}
     </div>

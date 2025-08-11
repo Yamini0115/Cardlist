@@ -15,7 +15,8 @@
     "react-dom": "^19.1.0",
     "react-scripts": "^5.0.1",
     "react-window": "^1.8.11",
-    "test": "^3.3.0"
+    "test": "^3.3.0",
+    "your-package": "^1.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",

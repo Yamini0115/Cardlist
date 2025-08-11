@@ -1,5 +1,4 @@
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';  
 import Cardlist from '../cardlist';
 
@@ -8,24 +7,30 @@ test('renders the heading and virtualized grid', () => {
   expect(screen.getByText(/Home Products lists/i)).toBeInTheDocument();
 });
 
-test('show scroll-to-top button after scrolling and scrolls to tap on click',()=>{
-    render(<Cardlist />);
-    const scrollButton=screen.queryByRole('button',{name:/top/i});
-    expect(scrollButton).not.toBeInTheDocument();
-    fireEvent.scroll(window,{target:{scrollY:400}});
-
-    setTimeout(()=>{
-        const newBtn=screen.queryByRole("button",{name:/top/i});
-        expect(newBtn).toBeInTheDocument();
-
-        fireEvent.click(newBtn);
-        expect(window.scrollY.toBe(0))
-    },100);
-})
-
-test('only render visible cards using virtual scrolling',()=>{
+test('show scroll-to-top button after scrolling and scrolls to top on click', async () => {
   render(<Cardlist />);
-  expect(screen.getByText('Product 1')).toBeInTheDocument();
+
+  const gridContainer = document.querySelector('.card-grid');
+  gridContainer.scrollTo = jest.fn();
+
+  fireEvent.scroll(gridContainer, { target: { scrollTop: 400 } });
+
+  const newBtn = await waitFor(() =>
+    screen.getByRole('button', { name: /top/i })
+  );
+
+  fireEvent.click(newBtn);
+
+  expect(gridContainer.scrollTo).toHaveBeenCalledWith({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+
+test('only render visible cards using virtual scrolling',async()=>{
+  render(<Cardlist />);
+  expect(await screen.findByText('product 1')).toBeInTheDocument();
   expect(screen.queryByText('product 999')).not.toBeInTheDocument();
 })
 
