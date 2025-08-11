@@ -9,7 +9,6 @@ test('renders the heading and virtualized grid', () => {
 
 test('show scroll-to-top button after scrolling and scrolls to top on click', async () => {
   render(<Cardlist />);
-
   const gridContainer = document.querySelector('.card-grid');
   gridContainer.scrollTo = jest.fn();
 
@@ -18,7 +17,6 @@ test('show scroll-to-top button after scrolling and scrolls to top on click', as
   const newBtn = await waitFor(() =>
     screen.getByRole('button', { name: /top/i })
   );
-
   fireEvent.click(newBtn);
 
   expect(gridContainer.scrollTo).toHaveBeenCalledWith({
